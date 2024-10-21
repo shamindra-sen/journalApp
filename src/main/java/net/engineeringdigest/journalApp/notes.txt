@@ -1,0 +1,19 @@
+>> Delivery Excellence Enablers:
+1. Smart QMS
+2. PiQ (Persistent Integrated Quality Management)
+
+>> Industry-leading methodologies:
+1. ISO
+2. CMMI
+
+>> Delivery Partnerships
+
+>> Customer Satisfaction Survey(CSAT)
+
+Project Management:-
+* Project Initiation
+* Project Health Report(PHR)
+* RAID(Risks Assumptions Issues Dependencies)
+* Project Measurements (WSR,MBR,QBR)
+* Project Governance
+* ProjectCSAT and AccountCSAT
