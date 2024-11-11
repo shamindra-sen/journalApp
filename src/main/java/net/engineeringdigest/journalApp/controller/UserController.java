@@ -1,19 +1,18 @@
 package net.engineeringdigest.journalApp.controller;
 
+import net.engineeringdigest.journalApp.api.WeatherResponse;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.service.UserService;
-import org.jetbrains.annotations.NotNull;
+import net.engineeringdigest.journalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/user")
@@ -21,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WeatherService weatherService;
 
 //    @GetMapping
 //    public Iterable<User> getAllUsers(){
@@ -68,5 +70,15 @@ public class UserController {
 //            return new ResponseEntity<>("User deleted successfully",HttpStatus.NO_CONTENT);
 //        }
         return new ResponseEntity<>("User deleted successfully",HttpStatus.GONE);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> greeting(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse= weatherService.getWeatherByCity("Kolkata");
+        String greeting ="";
+        if(weatherResponse!=null)
+            greeting = "\nWelcome to the Journal App! Your current weather is " + weatherResponse.getCurrent().getWeatherDescription().get(0) + " and feels like "+weatherResponse.getCurrent().getFeelslike();
+        return new ResponseEntity<>("Hello, " + authentication.getName() + greeting, HttpStatus.OK);
     }
 }
